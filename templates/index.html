@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Equipment Stock Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            padding: 20px;
+            max-width: 750px;
+            margin: auto;
+            background-color: rgba(240, 240, 240, 0);
+            background-image: url("../static/storageWallpapertest.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+        }
+        .item-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-right: 380px;
+            font-size: 18px;
+            padding: 10px;
+            position: relative;
+        }
+        .item-container:after {
+            content: '';
+            display: block;
+            width: 70%;
+            padding-top: 30px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            position: absolute;
+            left: 0;
+            z-index: -1;
+        }
+        .item-buttons {
+            display: flex;
+            gap: 5px;
+            padding-right: 350px;
+        }
+        .item {
+            margin-bottom: 20px;
+            display: flex;
+            position: relative;
+        }
+        .item button {
+            margin-left: 10px;
+            width: 50px;
+        }
+        .item-buttons button {
+            width: 40px;
+        }
+        .subcategory {
+            margin-left: 20px;
+            border-left: 2px solid #ccc;
+            padding-left: 10px;
+        }
+        .parent-category {
+            font-size: 20px;
+            font-weight: bold;B
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-weight: bold;
+            color: white;
+            border-bottom: 4px solid rgb(174, 15, 110);
+            border-radius: 5px;
+            padding: 5px;
+            width: 57%;
+        }
+        table {
+            width: 100%;
+            border: 2px solid black;
+            border-collapse: collapse;
+            background-color: rgba(240, 240, 240, 0.75);
+        }
+        table caption {
+            caption-side: top;
+            text-align: left;
+            color: rgb(254, 254, 254);
+        }
+        .laptops-border {
+            border-bottom: 4px solid rgb(141, 25, 21);
+            border-top: 4px solid rgb(141, 25, 21);
+            border-radius: 5px;
+            padding: 5px;
+            width: 12%;
+            background-color: rgba(11, 8, 91, 0.5);
+        }
+        .keyboards-border {
+            border-bottom: 4px solid rgb(141, 25, 21);
+            border-top: 4px solid rgb(141, 25, 21);
+            border-radius: 5px;
+            padding: 5px;
+            width: 15%;
+            background-color: rgba(11, 8, 91, 0.5);
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid black;
+        }
+        table tr:first-child {
+            color: rgb(141, 25, 21, 0.75);
+        }
+        tr:nth-child(even) {
+            background-color: rgb(224, 224, 224, 0.75);
+        }
+        .custom-input {
+            width: 40px;
+        }
+    </style>
+
+
+</head>
+<body>
+    <h1>IT Equipment Stock Tracker</h1>
+    <div class="item">
+        <table>
+            <caption class="parent-category keyboards-border">Keyboards:</caption>
+            <tr>
+                <th>Subcategory</th>
+                <th>Count</th>
+                <th>Actions</th>
+                <th>Input</th>
+            </tr>
+            <tr>
+                <td>Logitech Wireless MK270:</td>
+                <td><span id="logitech-mk270-count">0</span></td>
+                <td>
+                    <button onclick="updateStock('logitech-mk270', -1)">-</button>
+                    <button onclick="updateStock('logitech-mk270', 1)">+</button>
+                </td>
+                <td>
+                    <input type="number" id="logitech-mk270-input" value="0" min="0" class="custom-input">
+                    <button onclick="updateStockWithInput('logitech-mk270', 1)">+</button>
+                    <button onclick="updateStockWithInput('logitech-mk270', -1)">-</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="item">
+        <table>
+            <caption class="parent-category laptops-border">Laptops:</caption>
+            <tr>
+                <th>Subcategory</th>
+                <th>Count</th>
+                <th>Actions</th>
+                <th>Input</th>
+            </tr>
+            <tr>
+                <td><span>MacBooks:</span></td>
+                <td><span id="macbooks-count">0</span></td>
+                <td>
+                    <button onclick="updateStock('macbooks', -1)">-</button>
+                    <button onclick="updateStock('macbooks', 1)">+</button>
+                </td>
+                <td>
+                    <input type="number" id="macbooks-input" value="0" min="0" class="custom-input">
+                    <button onclick="updateStockWithInput('macbooks', 1)">+</button>
+                    <button onclick="updateStockWithInput('macbooks', -1)">-</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Lenovo T490:</td>
+                <td><span id="lenovo-t490-count">0</span></td>
+                <td>
+                    <button onclick="updateStock('lenovo-t490', -1)">-</button>
+                    <button onclick="updateStock('lenovo-t490', 1)">+</button>
+                </td>
+                <td>
+                    <input type="number" id="lenovo-t490-input" value="0" min="0" class="custom-input">
+                    <button onclick="updateStockWithInput('lenovo-t490', 1)">+</button>
+                    <button onclick="updateStockWithInput('lenovo-t490', -1)">-</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Lenovo P14s:</td>
+                <td><span id="lenovo-p14s-count">0</span></td>
+                <td>
+                    <button onclick="updateStock('lenovo-p14s', -1)">-</button>
+                    <button onclick="updateStock('lenovo-p14s', 1)">+</button>
+                </td>
+                <td>
+                    <input type="number" id="lenovo-p14s-input" value="0" min="0" class="custom-input">
+                    <button onclick="updateStockWithInput('lenovo-p14s', 1)">+</button>
+                    <button onclick="updateStockWithInput('lenovo-p14s', -1)">-</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Lenovo P43s:</td>
+                <td><span id="lenovo-p43s-count">0</span></td>
+                <td>
+                    <button onclick="updateStock('lenovo-p43s', -1)">-</button>
+                    <button onclick="updateStock('lenovo-p43s', 1)">+</button>
+                </td>
+                <td>
+                    <input type="number" id="lenovo-p43s-input" value="0" min="0" class="custom-input">
+                    <button onclick="updateStockWithInput('lenovo-p43s', 1)">+</button>
+                    <button onclick="updateStockWithInput('lenovo-p43s', -1)">-</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Lenovo P53s:</td>
+                <td><span id="lenovo-p53s-count">0</span></td>
+                <td>
+                    <button onclick="updateStock('lenovo-p53s', -1)">-</button>
+                    <button onclick="updateStock('lenovo-p53s', 1)">+</button>
+                </td>
+                <td>
+                    <input type="number" id="lenovo-p53s-input" value="0" min="0" class="custom-input">
+                    <button onclick="updateStockWithInput('lenovo-p53s', 1)">+</button>
+                    <button onclick="updateStockWithInput('lenovo-p53s', -1)">-</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Lenovo T14:</td>
+                <td><span id="lenovo-t14-count">0</span></td>
+                <td>
+                    <button onclick="updateStock('lenovo-t14', -1)">-</button>
+                    <button onclick="updateStock('lenovo-t14', 1)">+</button>
+                </td>
+                <td>
+                    <input type="number" id="lenovo-t14-input" value="0" min="0" class="custom-input">
+                    <button onclick="updateStockWithInput('lenovo-t14', 1)">+</button>
+                    <button onclick="updateStockWithInput('lenovo-t14', -1)">-</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Lenovo E14:</td>
+                <td><span id="lenovo-e14-count">0</span></td>
+                <td>
+                    <button onclick="updateStock('lenovo-e14', -1)">-</button>
+                    <button onclick="updateStock('lenovo-e14', 1)">+</button>
+                </td>
+                <td>
+                    <input type="number" id="lenovo-e14-input" value="0" min="0" class="custom-input">
+                    <button onclick="updateStockWithInput('lenovo-e14', 1)">+</button>
+                    <button onclick="updateStockWithInput('lenovo-e14', -1)">-</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Lenovo T14s:</td>
+                <td><span id="lenovo-t14s-count">0</span></td>
+                <td>
+                    <button onclick="updateStock('lenovo-t14s', -1)">-</button>
+                    <button onclick="updateStock('lenovo-t14s', 1)">+</button>
+                </td>
+                <td>
+                    <input type="number" id="lenovo-t14s-input" value="0" min="0" class="custom-input">
+                    <button onclick="updateStockWithInput('lenovo-t14s', 1)">+</button>
+                    <button onclick="updateStockWithInput('lenovo-t14s', -1)">-</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="item-container">
+        <span>Headsets: <span id="headsets-count">0</span></span>
+        <div class="item-buttons">
+            <button onclick="updateStock('headsets', -1)">-</button>
+            <button onclick="updateStock('headsets', 1)">+</button>
+            <input type="number" id="headsets-input" value="0" min="0" class="custom-input">
+            <button onclick="updateStockWithInput('headsets', 1)">+</button>
+            <button onclick="updateStockWithInput('headsets', -1)">-</button>
+        </div>
+    </div>
+    <!-- Add more items and subcategories as needed -->
+    <script>
+    async function updateStock(item, change) {
+        const countElement = document.getElementById(`${item}-count`);
+        let currentCount = parseInt(countElement.innerText);
+        currentCount += change;
+        if (currentCount < 0) currentCount = 0; // Prevent negative stock
+        countElement.innerText = currentCount;
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/update_stock/${item}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ change: change })
+            });
+            const data = await response.json();
+            if (response.status !== 200) {
+                throw new Error(data.error || 'Failed to update stock');
+            }
+            countElement.innerText = data.count;
+        } catch (error) {
+            console.error('Error updating stock:', error);
+            alert('Failed to update stock');
+        }
+    }
+    async function updateStockWithInput(item, change) {
+        const inputElement = document.getElementById(`${item}-input`);
+        let inputValue = parseInt(inputElement.value);
+        if (isNaN(inputValue) || inputValue <= 0) {
+            alert('Please enter a valid number greater than 0');
+            return;
+        }
+        inputValue *= change;
+        await updateStock(item, inputValue);
+    }
+
+<!--    async function updateStockWithInput(item) {-->
+<!--        const inputElement = document.getElementById(`${item}-input`);-->
+<!--        const change = parseInt(inputElement.value);-->
+<!--        if (isNaN(change) || change === 0) {-->
+<!--            alert('Please enter a valid number');-->
+<!--            return;-->
+<!--        }-->
+<!--        await updateStock(item, change);-->
+<!--    }-->
+
+    async function fetchStock(item) {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/get_stock/${item}`);
+            const data = await response.json();
+            if (response.status === 200) {
+                document.getElementById(`${item}-count`).innerText = data;
+            } else {
+                console.error('Error fetching stock:', data.error);
+            }
+        } catch (error) {
+            console.error('Error fetching stock:', error);
+        }
+    }
+
+    // Fetch stock counts for all items when the page loads
+    window.onload = function() {
+        fetchStock('keyboards');
+        fetchStock('headsets');
+        fetchStock('macbooks');
+        fetchStock('lenovo-t490');
+        fetchStock('lenovo-p14s');
+        fetchStock('lenovo-e14');
+        fetchStock('lenovo-t14');
+        fetchStock('lenovo-t14s');
+        fetchStock('lenovo-p53s');
+        fetchStock('lenovo-p43s');
+        fetchStock('logitech-mk270');
+    };
+</script>
+</body>
+</html>

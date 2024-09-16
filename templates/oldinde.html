@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Equipment Stock Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .item {
+            margin-bottom: 20px;
+        }
+        .item button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>IT Equipment Stock Tracker</h1>
+    <div class="item">
+        <h2>Keyboards: <span id="keyboards-count">10</span></h2>
+        <button onclick="updateStock('keyboards', -1)">Take One</button>
+        <button onclick="updateStock('keyboards', 1)">Add One</button>
+    </div>
+    <div class="item">
+        <h2>Headsets: <span id="headsets-count">5</span></h2>
+        <button onclick="updateStock('headsets', -1)">Take One</button>
+        <button onclick="updateStock('headsets', 1)">Add One</button>
+    </div>
+    <div class="item">
+        <h2>Laptops: <span id="laptops-count">3</span></h2>
+        <button onclick="updateStock('laptops', -1)">Take One</button>
+        <button onclick="updateStock('laptops', 1)">Add One</button>
+    </div>
+
+    <script>
+        function updateStock(item, change) {
+            const countElement = document.getElementById(`${item}-count`);
+            let currentCount = parseInt(countElement.innerText);
+            currentCount += change;
+            if (currentCount < 0) currentCount = 0; // Prevent negative stock
+            countElement.innerText = currentCount;
+        }
+    </script>
+</body>
+</html>
